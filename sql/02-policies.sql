@@ -10,28 +10,38 @@
 
 -- 1) 테이블 권한 — RLS 와 별개로 필요합니다.
 --    01-grants.sql 은 select 만 줬으므로 쓰기 권한을 여기서 더합니다.
-grant select, insert, update, delete on core.leadtime_plan to anon, authenticated;
-grant select, insert, update, delete on core.usage_profile to anon, authenticated;
+revoke all on core.leadtime_plan from anon;
+revoke all on core.usage_profile from anon;
+grant select on core.leadtime_plan, core.usage_profile to authenticated;
+grant insert, update, delete on core.leadtime_plan, core.usage_profile to authenticated;
 
 -- 2) RLS 정책
---    ⚠ 수업용입니다. publishable 키는 브라우저에 노출되므로,
---      키를 가진 사람은 누구나 이 두 테이블을 고칠 수 있습니다.
---      실제 운영에서는 auth.uid() 등으로 조건을 좁혀야 합니다.
+--    USER 는 조회만 가능하고, 쓰기는 core.is_admin() 을 통과한 ADMIN 만 가능합니다.
 drop policy if exists "수업용 전체 허용" on core.leadtime_plan;
-create policy "수업용 전체 허용"
+drop policy if exists leadtime_plan_authenticated_select on core.leadtime_plan;
+create policy leadtime_plan_authenticated_select
   on core.leadtime_plan
-  for all
-  to anon, authenticated
-  using (true)
-  with check (true);
+  for select to authenticated using (true);
+
+drop policy if exists leadtime_plan_admin_mutation on core.leadtime_plan;
+create policy leadtime_plan_admin_mutation
+  on core.leadtime_plan
+  for all to authenticated
+  using (core.is_admin())
+  with check (core.is_admin());
 
 drop policy if exists "수업용 전체 허용" on core.usage_profile;
-create policy "수업용 전체 허용"
+drop policy if exists usage_profile_authenticated_select on core.usage_profile;
+create policy usage_profile_authenticated_select
   on core.usage_profile
-  for all
-  to anon, authenticated
-  using (true)
-  with check (true);
+  for select to authenticated using (true);
+
+drop policy if exists usage_profile_admin_mutation on core.usage_profile;
+create policy usage_profile_admin_mutation
+  on core.usage_profile
+  for all to authenticated
+  using (core.is_admin())
+  with check (core.is_admin());
 
 -- 확인 — 두 줄이 나와야 합니다.
 select schemaname, tablename, policyname, roles, cmd
@@ -39,7 +49,7 @@ select schemaname, tablename, policyname, roles, cmd
  where schemaname = 'core'
    and tablename in ('leadtime_plan', 'usage_profile');
 
--- 되돌리기 (수업 후)
+-- 되돌리기 (필요 시)
 -- drop policy "수업용 전체 허용" on core.leadtime_plan;
 -- drop policy "수업용 전체 허용" on core.usage_profile;
 -- revoke insert, update, delete on core.leadtime_plan from anon, authenticated;

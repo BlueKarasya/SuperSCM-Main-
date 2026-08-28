@@ -1,32 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap");
 @import url("../styles/shell.css");
 @import url("../styles/components.css");
 @import url("../styles/chart.css");
 
 :root {
-  --ink: #182230;
-  --muted: #718096;
-  --line: #e3e8ef;
-  --canvas: #f5f7fb;
+  --ink: #0b1c30;
+  --muted: #5f6b7a;
+  --line: #d8e0ea;
+  --canvas: #f8f9ff;
   --surface: #ffffff;
-  --navy: #17365d;
-  --blue: #2f6fed;
-  --pale-blue: #edf4ff;
-  --green: #1f9d68;
-  --pale-green: #eaf8f1;
-  --amber: #bd7211;
-  --pale-amber: #fff6e4;
-  --red: #c2413d;
-  --pale-red: #fff0ef;
+  --navy: #0b1c30;
+  --blue: #0b1c30;
+  --pale-blue: #eff4ff;
+  --green: #006d35;
+  --pale-green: #e8f8ef;
+  --amber: #9a5b0d;
+  --pale-amber: #fff4df;
+  --red: #ba1a1a;
+  --pale-red: #ffdad6;
 
   /* STEP 1 디자인 토큰 */
   --color-bg: var(--canvas);
   --color-surface: var(--surface);
-  --color-surface-subtle: #f1f5f9;
+  --color-surface-subtle: #eff4ff;
   --color-text: var(--ink);
   --color-text-muted: var(--muted);
   --color-border: var(--line);
-  --color-primary: var(--blue);
+  --color-primary: var(--navy);
   --color-safe: var(--green);
   --color-safe-bg: var(--pale-green);
   --color-warning: var(--amber);
@@ -42,10 +42,11 @@
   --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow-panel: 0 8px 24px rgba(15, 23, 42, 0.05);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --shadow-panel: 0 4px 16px rgba(11, 28, 48, 0.045);
+  --shadow-soft: 0 2px 8px rgba(11, 28, 48, 0.04);
 }
 
 * {
@@ -59,8 +60,12 @@ body {
   color: var(--ink);
   background: var(--canvas);
   font-family: "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+h1, h2, h3, h4, .metric-value, .ui-kpi-card__value, .scm-topbar__title {
+  font-family: "Manrope", "Noto Sans KR", sans-serif;
 }
 button,
 input {
@@ -77,7 +82,7 @@ button {
 .sidebar {
   width: 250px;
   flex: 0 0 250px;
-  background: #102b4b;
+  background: var(--color-text);
   color: #fff;
   padding: 28px 18px;
   display: flex;
@@ -95,7 +100,8 @@ button {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: #2f6fed;
+  background: var(--color-primary);
+  color: var(--surface);
   font-weight: 800;
   letter-spacing: -1px;
 }
@@ -208,9 +214,9 @@ button {
   font-size: 12px;
 }
 .local-badge {
-  color: #196845;
+  color: var(--green);
   background: var(--pale-green);
-  border: 1px solid #c8ead8;
+  border: 1px solid color-mix(in srgb, var(--green) 20%, white);
   border-radius: 999px;
   padding: 6px 10px;
   font-weight: 700;
@@ -407,7 +413,7 @@ button {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px;
-  box-shadow: 0 3px 12px rgba(16, 43, 75, 0.025);
+  box-shadow: var(--shadow-panel);
 }
 .card-title {
   display: flex;

@@ -16,6 +16,7 @@ export const userMenu: MenuItem[] = [
 export const adminMenu: MenuItem[] = [
   { href: '/admin', label: '관리자 대시보드', icon: Gauge },
   { href: '/admin/analytics', label: '분석 관리', icon: BarChart3 },
+  { href: '/admin/users', label: '사용자 관리', icon: ShieldCheck },
 ];
 
 export function getMenu(role: MenuRole): MenuItem[] {

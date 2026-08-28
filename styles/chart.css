@@ -1,1 +1,1 @@
-.ui-chart-placeholder { min-height: 180px; display: grid; place-items: center; border: 1px dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-muted); background: var(--color-surface-subtle); }
+.ui-chart-placeholder { min-height: 180px; display: grid; place-items: center; border: 1px dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-muted); background: var(--color-surface-subtle); box-shadow: inset 0 0 0 1px rgba(255,255,255,.65); }
