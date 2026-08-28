@@ -1,0 +1,63 @@
+.ui-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-8);
+}
+
+.ui-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.ui-page-header h1 { margin: var(--space-1) 0 var(--space-2); font-size: 28px; color: var(--color-text); }
+.ui-page-header p { margin: 0; color: var(--color-text-muted); }
+
+.ui-panel {
+  margin-bottom: var(--space-5);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-panel);
+}
+
+.ui-panel__header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); }
+.ui-panel__title { margin: 0; font-size: 16px; }
+.ui-panel__description { margin: var(--space-1) 0 0; color: var(--color-text-muted); font-size: 13px; }
+
+.ui-kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: var(--space-5); }
+.ui-kpi-card { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-panel); }
+.ui-kpi-card__label { color: var(--color-text-muted); font-size: 12px; }
+.ui-kpi-card__value { margin-top: var(--space-2); color: var(--color-text); font-size: 26px; font-weight: 800; }
+.ui-kpi-card__foot { margin-top: var(--space-2); color: var(--color-text-muted); font-size: 11px; }
+
+.ui-badge { display: inline-flex; align-items: center; gap: var(--space-1); min-height: 24px; padding: 0 var(--space-2); border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.ui-badge--safe { color: var(--color-safe); background: var(--color-safe-bg); }
+.ui-badge--warning { color: var(--color-warning); background: var(--color-warning-bg); }
+.ui-badge--critical { color: var(--color-critical); background: var(--color-critical-bg); }
+.ui-badge--calculation-unavailable { color: var(--color-unavailable); background: var(--color-unavailable-bg); }
+
+.ui-button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 36px; padding: 0 var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text); background: var(--color-surface); font-weight: 700; cursor: pointer; }
+.ui-button:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.ui-button--primary { border-color: var(--color-primary); color: #fff; background: var(--color-primary); }
+.ui-button:disabled { cursor: not-allowed; opacity: .55; }
+
+.ui-data-table-wrap { overflow-x: auto; }
+.ui-data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ui-data-table th { padding: var(--space-3); border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); background: var(--color-surface-subtle); font-weight: 700; text-align: left; white-space: nowrap; }
+.ui-data-table td { padding: var(--space-3); border-bottom: 1px solid var(--color-border); color: var(--color-text); white-space: nowrap; }
+.ui-data-table tbody tr:hover td { background: #f8fafc; }
+
+.ui-alert-row { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-left: 3px solid var(--color-warning); color: var(--color-warning); background: var(--color-warning-bg); }
+.ui-alert-row--critical { border-left-color: var(--color-critical); color: var(--color-critical); background: var(--color-critical-bg); }
+.ui-insight-banner { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-4); border: 1px solid #cfe0ff; border-radius: var(--radius-md); color: var(--color-primary); background: #f1f6ff; }
+.ui-insight-banner strong { display: block; margin-bottom: var(--space-1); }
+.ui-empty-value { display: inline-flex; align-items: baseline; gap: var(--space-1); color: var(--color-unavailable); }
+.ui-empty-value small { font-size: 10px; font-weight: 700; }
+
+@media (max-width: 1050px) { .ui-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ui-page { padding: var(--space-6); } }
+@media (max-width: 560px) { .ui-page-header { display: block; } .ui-kpi-grid { grid-template-columns: 1fr; } .ui-panel { padding: var(--space-4); } }

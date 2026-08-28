@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeLeadtimeGap } from './scm-model.ts';
+import { normalizeLeadtimeGap, normalizeStockoutRisk } from './scm-model.ts';
 
 test('normalizes analytics leadtime rows into the screen model', () => {
   const result = normalizeLeadtimeGap({
@@ -52,4 +52,58 @@ test('reads the real analytics.v_leadtime_gap column names', () => {
     p80: 33,
     gap: 8,
   });
+});
+
+test('normalizes analytics stockout risk rows into the screen model', () => {
+  const result = normalizeStockoutRisk({
+    item_id: 'ITEM012',
+    item_name: 'A3 Printer Model A',
+    supplier_id: 'SUP003',
+    current_stock: '723',
+    inbound_qty: 361,
+    available_qty: 1084,
+    daily_usage_avg: 60.22,
+    planned_lead_time: 44,
+    stockout_days: 18,
+    stockout_date: '2026-09-18',
+    risk_status: 'CRITICAL',
+    reason: null,
+  });
+
+  assert.deepEqual(result, {
+    itemId: 'ITEM012',
+    itemName: 'A3 Printer Model A',
+    supplier: 'SUP003',
+    currentStock: 723,
+    inboundQty: 361,
+    availableQty: 1084,
+    dailyUsageAvg: 60.22,
+    plannedLeadTime: 44,
+    stockoutDays: 18,
+    stockoutDate: '2026-09-18',
+    riskStatus: 'CRITICAL',
+    reason: null,
+  });
+});
+
+test('preserves unknown stockout reasons and null calculated values', () => {
+  const result = normalizeStockoutRisk({
+    item_id: 'ITEM020',
+    item_name: '사용 이력 없는 품목',
+    supplier_id: 'SUP001',
+    current_stock: 380,
+    inbound_qty: 201,
+    available_qty: 581,
+    daily_usage_avg: null,
+    planned_lead_time: null,
+    stockout_days: null,
+    stockout_date: null,
+    risk_status: 'UNKNOWN',
+    reason: 'NO_USAGE',
+  });
+
+  assert.equal(result.stockoutDays, null);
+  assert.equal(result.stockoutDate, null);
+  assert.equal(result.riskStatus, 'UNKNOWN');
+  assert.equal(result.reason, 'NO_USAGE');
 });

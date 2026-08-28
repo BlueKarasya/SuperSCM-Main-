@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap");
+@import url("../styles/shell.css");
+@import url("../styles/components.css");
+@import url("../styles/chart.css");
 
 :root {
   --ink: #182230;
@@ -15,6 +18,34 @@
   --pale-amber: #fff6e4;
   --red: #c2413d;
   --pale-red: #fff0ef;
+
+  /* STEP 1 디자인 토큰 */
+  --color-bg: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-subtle: #f1f5f9;
+  --color-text: var(--ink);
+  --color-text-muted: var(--muted);
+  --color-border: var(--line);
+  --color-primary: var(--blue);
+  --color-safe: var(--green);
+  --color-safe-bg: var(--pale-green);
+  --color-warning: var(--amber);
+  --color-warning-bg: var(--pale-amber);
+  --color-critical: var(--red);
+  --color-critical-bg: var(--pale-red);
+  --color-unavailable: #64748b;
+  --color-unavailable-bg: #f1f5f9;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-panel: 0 8px 24px rgba(15, 23, 42, 0.05);
 }
 
 * {
