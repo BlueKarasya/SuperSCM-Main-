@@ -24,6 +24,10 @@ alter default privileges in schema analytics
 -- raw 스키마는 일부러 열지 않습니다.
 -- core/analytics 뷰가 postgres 소유(security definer)라 raw 를 대신 읽어줍니다.
 
--- 확인
-select has_schema_privilege('anon', 'analytics', 'usage')                 as anon_schema_ok,
-       has_table_privilege('authenticated', 'analytics.v_leadtime_gap', 'select') as authenticated_view_ok;
+-- 확인 — anon은 false, authenticated 네 항목은 모두 true여야 합니다.
+select
+  has_schema_privilege('anon', 'analytics', 'usage') as anon_schema_usage,
+  has_schema_privilege('authenticated', 'analytics', 'usage') as analytics_schema_usage,
+  has_table_privilege('authenticated', 'analytics.v_leadtime_gap', 'select') as leadtime_select,
+  has_table_privilege('authenticated', 'analytics.v_stockout_risk', 'select') as stockout_select,
+  has_table_privilege('authenticated', 'analytics.v_stockout_kpi', 'select') as stockout_kpi_select;
